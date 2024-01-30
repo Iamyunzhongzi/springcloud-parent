@@ -1,0 +1,62 @@
+server:
+  port: 8084
+
+#StripPrefix跳过某个字段不拼接到URL上， consumer-order有多个时lb_route + discovery路由负载均衡
+# 37:18
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: config_routes
+          predicates:
+            - Path=/gateway/**
+          filters:
+           - StripPrefix=1
+          uri: http://localhost:8082/
+
+        - id: lb_route
+          predicates:
+            - Path=/lb/**
+          filters:
+           - StripPrefix=1
+          uri: lb://consumer-order
+          #限流器
+        - id: ip_RateLimiter
+          predicates:
+            - Path=/ratelimiter/**
+          filters:
+           - StripPrefix=1
+           - name: RequestRateLimiter
+             args:
+                deny-empty-key: true
+                #指定限流类
+                keyResolver: '#{@ipAddressKeyResolver}'
+                #每秒产生多少令牌
+                redis-rate-limiter.replenishRate: 1
+                #令牌桶容量
+                redis-rate-limiter.burstCapacity: 1
+          uri: lb://consumer-order
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+  #链路监控
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://39.108.65.199:9411/
+
+  #redis连接 ,动态路由使用
+  redis:
+    host: 39.108.65.199
+    port: 6379
+
+#日志
+logging:
+  level:
+    org.springframework.cloud.sleuth: debug
+

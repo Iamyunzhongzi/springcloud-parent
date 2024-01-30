@@ -1,0 +1,32 @@
+server:
+  port: 8761  
+spring:
+  application:
+    name: EUREKA
+  security:
+    #用户名和密码
+    user:
+      name: eureka
+      password: 123456
+eureka:
+  instance:
+    #服务注册中心实例的主机名
+    hostname: node-1
+    #实例地址
+    ip-address: localhost
+    #在Eureka中显示真实IP:端口号
+    prefer-ip-address: true
+  server:
+    #关闭服务自我保护(开启将不移除无效服务)  
+    enable-self-preservation: false
+    #续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+    eviction-interval-timer-in-ms: 10000
+  client:
+    #是否向服务注册中心注册自己
+    register-with-eureka: false
+    #是否检索服务
+    fetch-registry: false
+    #服务注册中心的配置内容，指定服务注册中心的位置
+    service-url:
+      #defaultZone: http://eureka:123456@localhost:8761/eureka
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.ip-address}:${server.port}/eureka
