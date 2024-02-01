@@ -7,6 +7,8 @@
     <groupId>com.springcloud.www</groupId>
     <artifactId>springcloud-parent</artifactId>
     <packaging>pom</packaging>
+    <!--<packaging>war</packaging>-->
+
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>eureka</module>
@@ -63,7 +65,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
-            <scope>true</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -103,6 +105,10 @@
                     <maxmem>512m</maxmem><!-- 编译器使用的最大内存 -->
                     <!--<compilerArgument>-verbose -bootclasspath ${java.home}\lib\rt.jar</compilerArgument>--><!-- 这个选项用来传递编译器自身不包含但是却支持的参数选项 -->
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
             </plugin>
         </plugins>
     </build>

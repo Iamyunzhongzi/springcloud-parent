@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.springcloud.www</groupId>
     <artifactId>gateway</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>gateway</name>
     <description>Demo project for Spring Boot</description>
@@ -71,13 +72,13 @@
         </dependencies>
     </dependencyManagement>
 
-    <build>
+   <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>
