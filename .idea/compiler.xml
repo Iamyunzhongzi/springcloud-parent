@@ -9,14 +9,19 @@
         <module name="common" />
         <module name="movie" />
         <module name="gateway" />
-        <module name="order" />
         <module name="eureka" />
+        <module name="order" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="" />
+      <module name="eureka" options="" />
       <module name="gateway" options="-parameters" />
+      <module name="movie" options="" />
+      <module name="order" options="" />
+      <module name="springcloud-parent" options="" />
     </option>
   </component>
 </project>

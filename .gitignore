@@ -1,0 +1,7 @@
+/.idea/
+/common/target/
+/eureka/target/
+/gateway/target/
+/movie/target/
+/order/target/
+*.class
